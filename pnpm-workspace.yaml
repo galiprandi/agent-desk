@@ -1,0 +1,6 @@
+minimumReleaseAgeExclude:
+  - '@tanstack/query-core@5.102.0'
+  - '@tanstack/react-query@5.102.0'
+  - '@tanstack/react-router@1.170.32'
+  - '@tanstack/router-core@1.171.27'
+  - '@testing-library/user-event@14.6.6'

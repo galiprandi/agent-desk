@@ -8,9 +8,17 @@ import {
 import { Dashboard } from "./views/Dashboard";
 import { TasksView } from "./views/TasksView";
 import { CalendarView } from "./views/CalendarView";
+import { Header } from "./components/Header";
 
 const rootRoute = createRootRoute({
-  component: () => <Outlet />,
+  component: () => (
+    <>
+      <Header />
+      <main className="mx-auto max-w-6xl px-4 py-6">
+        <Outlet />
+      </main>
+    </>
+  ),
 });
 
 const indexRoute = createRoute({

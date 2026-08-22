@@ -18,6 +18,7 @@ import { tasksAPI, linksAPI } from "@/api/agentAPI";
 import { useApiRefresh } from "@/hooks/useApiRefresh";
 import { useTaskStates } from "@/hooks/useTaskStates";
 import type { TaskRecord } from "@/lib/db";
+import { LLMInstructions } from "@/components/LLMInstructions";
 
 export function TasksView() {
   const { t } = useTranslation();
@@ -86,25 +87,25 @@ export function TasksView() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-testid="tasks-view">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("tasks.title")}</h1>
-        <Button onClick={openNew}>
+        <h1 className="text-2xl font-bold" data-testid="tasks-title">{t("tasks.title")}</h1>
+        <Button onClick={openNew} data-testid="task-create-btn">
           <Plus className="h-4 w-4" />
           {t("tasks.new")}
         </Button>
       </div>
 
-      <Tabs defaultValue="kanban">
+      <Tabs defaultValue="kanban" data-testid="tasks-view-toggle">
         <TabsList>
-          <TabsTrigger value="kanban">{t("tasks.kanban")}</TabsTrigger>
-          <TabsTrigger value="list">{t("tasks.list")}</TabsTrigger>
+          <TabsTrigger value="kanban" data-testid="tasks-tab-kanban">{t("tasks.kanban")}</TabsTrigger>
+          <TabsTrigger value="list" data-testid="tasks-tab-list">{t("tasks.list")}</TabsTrigger>
         </TabsList>
-        <TabsContent value="kanban">
+        <TabsContent value="kanban" data-testid="tasks-kanban-content">
           <KanbanBoard states={states} onEditTask={openEdit} />
         </TabsContent>
-        <TabsContent value="list">
-          <div className="rounded-md border">
+        <TabsContent value="list" data-testid="tasks-list-content">
+          <div className="rounded-md border" data-testid="tasks-list-table">
             <table className="w-full text-sm">
               <thead className="bg-muted/50">
                 {table.getHeaderGroups().map((hg) => (
@@ -136,6 +137,7 @@ export function TasksView() {
                   table.getRowModel().rows.map((row) => (
                     <tr
                       key={row.id}
+                      data-testid={`task-row-${row.original.id}`}
                       className="border-t cursor-pointer hover:bg-accent/50"
                       onClick={() => openEdit(row.original)}
                     >
@@ -154,6 +156,8 @@ export function TasksView() {
       </Tabs>
 
       <TaskDialog open={dialogOpen} onOpenChange={setDialogOpen} task={editing} />
+
+      <LLMInstructions view="tasks" />
     </div>
   );
 }

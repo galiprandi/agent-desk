@@ -13,6 +13,7 @@ import { useApiRefresh } from "@/hooks/useApiRefresh";
 import { useTaskStates } from "@/hooks/useTaskStates";
 import type { TaskRecord } from "@/lib/db";
 import { isToday, isPast, parseISO, format } from "date-fns";
+import { LLMInstructions } from "@/components/LLMInstructions";
 
 const PRIORITY_ORDER: Record<TaskRecord["priority"], number> = {
   urgent: 0,
@@ -55,11 +56,11 @@ export function Dashboard() {
   }, [states]);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">{t("nav.dashboard")}</h1>
+    <div className="space-y-6" data-testid="dashboard-view">
+      <h1 className="text-2xl font-bold" data-testid="dashboard-title">{t("nav.dashboard")}</h1>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card>
+        <Card data-testid="requires-attention">
           <CardHeader>
             <CardTitle>{t("dashboard.requiresAttention")}</CardTitle>
             <CardDescription>{t("app.tagline")}</CardDescription>
@@ -71,6 +72,7 @@ export function Dashboard() {
               attentionTasks.map((task) => (
                 <div
                   key={task.id}
+                  data-testid={`attention-task-${task.id}`}
                   className="flex items-center justify-between rounded-md border p-2"
                 >
                   <div className="min-w-0">
@@ -86,7 +88,7 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="upcoming-events">
           <CardHeader>
             <CardTitle>{t("dashboard.upcomingEvents")}</CardTitle>
           </CardHeader>
@@ -97,6 +99,7 @@ export function Dashboard() {
               upcomingEvents.map((event) => (
                 <div
                   key={event.id}
+                  data-testid={`upcoming-event-${event.id}`}
                   className="flex items-center justify-between rounded-md border p-2"
                 >
                   <div className="min-w-0">
@@ -114,7 +117,7 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="last-session">
           <CardHeader>
             <CardTitle>{t("dashboard.lastSession")}</CardTitle>
           </CardHeader>
@@ -140,7 +143,7 @@ export function Dashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="active-tasks">
           <CardHeader>
             <CardTitle>{t("dashboard.activeTasks")}</CardTitle>
           </CardHeader>
@@ -151,6 +154,7 @@ export function Dashboard() {
               activeTasks.slice(0, 8).map((task) => (
                 <div
                   key={task.id}
+                  data-testid={`active-task-${task.id}`}
                   className="flex items-center justify-between rounded-md border p-2"
                 >
                   <p className="truncate text-sm font-medium">{task.title}</p>
@@ -163,6 +167,8 @@ export function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      <LLMInstructions view="dashboard" />
     </div>
   );
 }

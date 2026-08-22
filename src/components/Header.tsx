@@ -13,12 +13,14 @@ import { useTheme } from "@/hooks/useTheme";
 import { useLanguage } from "@/hooks/useLanguage";
 import { cn } from "@/lib/utils";
 
-function NavLink({ to, icon, label }: { to: string; icon: React.ReactNode; label: string }) {
+function NavLink({ to, icon, label, testId }: { to: string; icon: React.ReactNode; label: string; testId: string }) {
   const router = useRouterState();
   const active = router.location.pathname === to;
   return (
     <Link
       to={to}
+      data-testid={testId}
+      data-active={active}
       className={cn(
         "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
         active
@@ -38,31 +40,31 @@ export function Header() {
   const { current, change } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
+    <header data-testid="app-header" className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
-        <span className="mr-2 text-lg font-bold">{t("app.title")}</span>
-        <nav className="flex items-center gap-1">
-          <NavLink to="/" icon={<LayoutDashboard className="h-4 w-4" />} label={t("nav.dashboard")} />
-          <NavLink to="/tasks" icon={<ListTodo className="h-4 w-4" />} label={t("nav.tasks")} />
-          <NavLink to="/calendar" icon={<Calendar className="h-4 w-4" />} label={t("nav.calendar")} />
+        <span data-testid="app-title" className="mr-2 text-lg font-bold">{t("app.title")}</span>
+        <nav data-testid="app-nav" className="flex items-center gap-1">
+          <NavLink to="/" testId="nav-dashboard" icon={<LayoutDashboard className="h-4 w-4" />} label={t("nav.dashboard")} />
+          <NavLink to="/tasks" testId="nav-tasks" icon={<ListTodo className="h-4 w-4" />} label={t("nav.tasks")} />
+          <NavLink to="/calendar" testId="nav-calendar" icon={<Calendar className="h-4 w-4" />} label={t("nav.calendar")} />
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label={t("language.label")}>
+              <Button variant="ghost" size="icon" aria-label={t("language.label")} data-testid="language-toggle">
                 <Languages className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => change("en")}>
+            <DropdownMenuContent align="end" data-testid="language-menu">
+              <DropdownMenuItem data-testid="language-en" onClick={() => change("en")}>
                 {t("language.en")} {current === "en" && "✓"}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => change("es")}>
+              <DropdownMenuItem data-testid="language-es" onClick={() => change("es")}>
                 {t("language.es")} {current === "es" && "✓"}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={t("theme.toggle")}>
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label={t("theme.toggle")} data-testid="theme-toggle">
             {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
           </Button>
         </div>

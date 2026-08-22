@@ -75,15 +75,16 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent data-testid="task-dialog">
         <DialogHeader>
-          <DialogTitle>{task ? t("tasks.edit") : t("tasks.new")}</DialogTitle>
+          <DialogTitle data-testid="task-dialog-title">{task ? t("tasks.edit") : t("tasks.new")}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="task-title">{t("tasks.titleField")}</Label>
             <Input
               id="task-title"
+              data-testid="task-field-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -92,6 +93,7 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
             <Label htmlFor="task-desc">{t("tasks.description")}</Label>
             <Textarea
               id="task-desc"
+              data-testid="task-field-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -100,12 +102,12 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
             <div className="space-y-2">
               <Label>{t("tasks.status")}</Label>
               <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger>
+                <SelectTrigger data-testid="task-field-status">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {states.map((s) => (
-                    <SelectItem key={s} value={s}>
+                    <SelectItem key={s} value={s} data-testid={`task-status-option-${s}`}>
                       {s}
                     </SelectItem>
                   ))}
@@ -118,12 +120,12 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
                 value={priority}
                 onValueChange={(v) => setPriority(v as TaskRecord["priority"])}
               >
-                <SelectTrigger>
+                <SelectTrigger data-testid="task-field-priority">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {PRIORITIES.map((p) => (
-                    <SelectItem key={p} value={p}>
+                    <SelectItem key={p} value={p} data-testid={`task-priority-option-${p}`}>
                       {t(`priority.${p}`)}
                     </SelectItem>
                   ))}
@@ -136,6 +138,7 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
               <Label htmlFor="task-due">{t("tasks.dueDate")}</Label>
               <Input
                 id="task-due"
+                data-testid="task-field-dueDate"
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
@@ -145,6 +148,7 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
               <Label htmlFor="task-tags">{t("tasks.tags")}</Label>
               <Input
                 id="task-tags"
+                data-testid="task-field-tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
                 placeholder={t("tasks.tagsPlaceholder")}
@@ -153,10 +157,10 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="task-cancel-btn">
             {t("tasks.cancel")}
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim()}>
+          <Button onClick={handleSave} disabled={!title.trim()} data-testid="task-submit-btn">
             {t("tasks.save")}
           </Button>
         </DialogFooter>

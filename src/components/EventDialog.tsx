@@ -76,15 +76,16 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent data-testid="event-dialog">
         <DialogHeader>
-          <DialogTitle>{event ? t("calendar.edit") : t("calendar.new")}</DialogTitle>
+          <DialogTitle data-testid="event-dialog-title">{event ? t("calendar.edit") : t("calendar.new")}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="event-title">{t("calendar.titleField")}</Label>
             <Input
               id="event-title"
+              data-testid="event-field-title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -93,6 +94,7 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
             <Label htmlFor="event-desc">{t("calendar.description")}</Label>
             <Textarea
               id="event-desc"
+              data-testid="event-field-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -102,6 +104,7 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
               <Label htmlFor="event-start">{t("calendar.start")}</Label>
               <Input
                 id="event-start"
+                data-testid="event-field-start"
                 type={allDay ? "date" : "datetime-local"}
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
@@ -111,6 +114,7 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
               <Label htmlFor="event-end">{t("calendar.end")}</Label>
               <Input
                 id="event-end"
+                data-testid="event-field-end"
                 type={allDay ? "date" : "datetime-local"}
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
@@ -120,6 +124,7 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
           <div className="flex items-center gap-2">
             <input
               id="event-allday"
+              data-testid="event-field-allDay"
               type="checkbox"
               checked={allDay}
               onChange={(e) => setAllDay(e.target.checked)}
@@ -131,6 +136,7 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
             <Label htmlFor="event-loc">{t("calendar.location")}</Label>
             <Input
               id="event-loc"
+              data-testid="event-field-location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
@@ -149,10 +155,10 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
           )}
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="event-cancel-btn">
             {t("calendar.cancel")}
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim()}>
+          <Button onClick={handleSave} disabled={!title.trim()} data-testid="event-submit-btn">
             {t("calendar.save")}
           </Button>
         </DialogFooter>

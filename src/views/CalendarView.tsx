@@ -24,6 +24,7 @@ import { eventsAPI } from "@/api/agentAPI";
 import { useApiRefresh } from "@/hooks/useApiRefresh";
 import type { EventRecord } from "@/lib/db";
 import { cn } from "@/lib/utils";
+import { LLMInstructions } from "@/components/LLMInstructions";
 
 type ViewMode = "month" | "week" | "day";
 
@@ -69,33 +70,34 @@ export function CalendarView() {
   }, [mode, cursor]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" data-testid="calendar-view">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("calendar.title")}</h1>
-        <Button onClick={() => openNew()}>
+        <h1 className="text-2xl font-bold" data-testid="calendar-title">{t("calendar.title")}</h1>
+        <Button onClick={() => openNew()} data-testid="event-create-btn">
           <Plus className="h-4 w-4" />
           {t("calendar.new")}
         </Button>
       </div>
 
-      <Tabs value={mode} onValueChange={(v) => setMode(v as ViewMode)}>
+      <Tabs value={mode} onValueChange={(v) => setMode(v as ViewMode)} data-testid="calendar-view-switcher">
         <div className="flex items-center justify-between">
           <TabsList>
-            <TabsTrigger value="month">{t("calendar.month")}</TabsTrigger>
-            <TabsTrigger value="week">{t("calendar.week")}</TabsTrigger>
-            <TabsTrigger value="day">{t("calendar.day")}</TabsTrigger>
+            <TabsTrigger value="month" data-testid="calendar-tab-month">{t("calendar.month")}</TabsTrigger>
+            <TabsTrigger value="week" data-testid="calendar-tab-week">{t("calendar.week")}</TabsTrigger>
+            <TabsTrigger value="day" data-testid="calendar-tab-day">{t("calendar.day")}</TabsTrigger>
           </TabsList>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="icon" onClick={prev}>
+            <Button variant="outline" size="icon" onClick={prev} data-testid="calendar-prev" aria-label={t("calendar.prev")}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span className="min-w-[140px] text-center text-sm font-medium">{headerLabel}</span>
-            <Button variant="outline" size="icon" onClick={next}>
+            <span className="min-w-[140px] text-center text-sm font-medium" data-testid="calendar-header-label">{headerLabel}</span>
+            <Button variant="outline" size="icon" onClick={next} data-testid="calendar-next" aria-label={t("calendar.next")}>
               <ChevronRight className="h-4 w-4" />
             </Button>
             <Button
               variant="ghost"
               size="sm"
+              data-testid="calendar-today"
               onClick={() => {
                 setCursor(new Date());
               }}
@@ -105,13 +107,13 @@ export function CalendarView() {
           </div>
         </div>
 
-        <TabsContent value="month">
+        <TabsContent value="month" data-testid="calendar-month-content">
           <MonthView cursor={cursor} events={events} onEdit={openEdit} onNew={openNew} />
         </TabsContent>
-        <TabsContent value="week">
+        <TabsContent value="week" data-testid="calendar-week-content">
           <WeekView cursor={cursor} events={events} onEdit={openEdit} onNew={openNew} />
         </TabsContent>
-        <TabsContent value="day">
+        <TabsContent value="day" data-testid="calendar-day-content">
           <DayView cursor={cursor} events={events} onEdit={openEdit} onNew={openNew} />
         </TabsContent>
       </Tabs>
@@ -122,6 +124,8 @@ export function CalendarView() {
         event={editing}
         defaultStart={defaultStart}
       />
+
+      <LLMInstructions view="calendar" />
     </div>
   );
 }
@@ -147,7 +151,7 @@ function MonthView({
   const days = eachDayOfInterval({ start, end });
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border" data-testid="calendar-month-grid">
       <div className="grid grid-cols-7 border-b bg-muted/50 text-xs font-medium">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
           <div key={d} className="p-2 text-center">
@@ -162,6 +166,7 @@ function MonthView({
           return (
             <div
               key={day.toISOString()}
+              data-testid={`calendar-day-${format(day, "yyyy-MM-dd")}`}
               className={cn(
                 "min-h-[90px] border-r border-b p-1 last:border-r-0",
                 !inMonth && "bg-muted/20 text-muted-foreground"
@@ -202,12 +207,13 @@ function WeekView({
   const days = eachDayOfInterval({ start, end });
 
   return (
-    <div className="grid grid-cols-7 gap-2">
+    <div className="grid grid-cols-7 gap-2" data-testid="calendar-week-grid">
       {days.map((day) => {
         const dayEvents = eventsOnDay(events, day);
         return (
           <div
             key={day.toISOString()}
+            data-testid={`calendar-week-day-${format(day, "yyyy-MM-dd")}`}
             className="min-h-[200px] rounded-md border p-2"
             onDoubleClick={() => onNew(day)}
           >
@@ -248,7 +254,7 @@ function DayView({
     .sort((a, b) => a.start.localeCompare(b.start));
 
   return (
-    <div className="rounded-md border p-4" onDoubleClick={() => onNew(cursor)}>
+    <div className="rounded-md border p-4" data-testid="calendar-day-view" onDoubleClick={() => onNew(cursor)}>
       {dayEvents.length === 0 ? (
         <p className="text-sm text-muted-foreground">{t("calendar.noEvents")}</p>
       ) : (
@@ -256,6 +262,7 @@ function DayView({
           {dayEvents.map((e) => (
             <div
               key={e.id}
+              data-testid={`event-item-${e.id}`}
               className="group flex items-center justify-between rounded-md border p-3"
               onClick={() => onEdit(e)}
             >
@@ -272,6 +279,7 @@ function DayView({
                 variant="ghost"
                 size="icon"
                 className="h-7 w-7 opacity-0 group-hover:opacity-100"
+                data-testid={`event-delete-${e.id}`}
                 onClick={(ev) => {
                   ev.stopPropagation();
                   if (confirm(t("calendar.confirmDelete"))) eventsAPI.delete(e.id);
@@ -290,6 +298,7 @@ function DayView({
 function EventPill({ event, onClick }: { event: EventRecord; onClick: () => void }) {
   return (
     <button
+      data-testid={`event-pill-${event.id}`}
       onClick={onClick}
       className="group w-full truncate rounded bg-primary/10 px-1.5 py-0.5 text-left text-xs text-primary hover:bg-primary/20"
     >

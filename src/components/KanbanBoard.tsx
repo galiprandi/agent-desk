@@ -88,7 +88,7 @@ export function KanbanBoard({ states, onEditTask }: KanbanBoardProps) {
       onDragEnd={handleDragEnd}
       onDragCancel={() => setActiveId(null)}
     >
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      <div className="flex gap-4 overflow-x-auto pb-4" data-testid="kanban-board">
         {states.map((state) => (
           <KanbanColumn
             key={state}
@@ -118,10 +118,10 @@ function KanbanColumn({
 }) {
   const { setNodeRef } = useDroppable({ id: state });
   return (
-    <div className="flex w-72 shrink-0 flex-col rounded-lg border bg-muted/30">
+    <div className="flex w-72 shrink-0 flex-col rounded-lg border bg-muted/30" data-testid={`kanban-column-${state}`}>
       <div className="flex items-center justify-between border-b p-3">
         <span className="text-sm font-semibold capitalize">{state}</span>
-        <Badge variant="secondary">{tasks.length}</Badge>
+        <Badge variant="secondary" data-testid={`kanban-column-count-${state}`}>{tasks.length}</Badge>
       </div>
       <div ref={setNodeRef} className="flex-1 space-y-2 p-2 min-h-[100px]">
         <SortableContext
@@ -154,7 +154,7 @@ function SortableTaskCard({
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners} data-testid={`kanban-card-${task.id}`}>
       <TaskCard task={task} onEditTask={onEditTask} />
     </div>
   );
@@ -186,6 +186,7 @@ function TaskCard({
           variant="ghost"
           size="icon"
           className="h-6 w-6 opacity-0 group-hover:opacity-100"
+          data-testid={`task-delete-${task.id}`}
           onClick={(e) => {
             e.stopPropagation();
             if (confirm(t("tasks.confirmDelete"))) tasksAPI.delete(task.id);

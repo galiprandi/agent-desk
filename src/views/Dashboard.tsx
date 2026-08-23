@@ -14,6 +14,7 @@ import { useTaskStates } from "@/hooks/useTaskStates";
 import type { TaskRecord } from "@/lib/db";
 import { isToday, isPast, parseISO, format } from "date-fns";
 import { LLMInstructions } from "@/components/LLMInstructions";
+import { ShortcutsHintBanner } from "@/components/ShortcutsHintBanner";
 
 const PRIORITY_ORDER: Record<TaskRecord["priority"], number> = {
   urgent: 0,
@@ -58,6 +59,8 @@ export function Dashboard() {
   return (
     <div className="space-y-6" data-testid="dashboard-view">
       <h1 className="text-2xl font-bold" data-testid="dashboard-title">{t("nav.dashboard")}</h1>
+
+      <ShortcutsHintBanner />
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card data-testid="requires-attention">

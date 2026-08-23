@@ -105,6 +105,9 @@ export const en = {
     title: "Keyboard Shortcuts",
     description: "Press ? at any time to open this page. Sequences are vim-style: press the first key, then the second within 1 second.",
     registered: "{{count}} shortcuts registered",
+    hintBanner: "Press ? to see all keyboard shortcuts",
+    hintDismiss: "Dismiss",
+    hintView: "View shortcuts",
     columns: {
       key: "Key",
       action: "Action",

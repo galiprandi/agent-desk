@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Moon, Sun, Languages, LayoutDashboard, ListTodo, Calendar, Database, Download, Upload, Keyboard } from "lucide-react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -41,6 +41,7 @@ export function Header() {
   const { t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const { current, change } = useLanguage();
+  const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleExport = () => {
@@ -91,6 +92,15 @@ export function Header() {
     <header data-testid="app-header" className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
         <span data-testid="app-title" className="mr-2 text-lg font-bold">{t("app.title")}</span>
+        <button
+          onClick={() => navigate({ to: "/shortcuts" })}
+          data-testid="header-shortcuts-hint"
+          aria-label={t("shortcuts.hintBanner")}
+          className="hidden items-center gap-1 rounded-full border border-primary/30 bg-primary/5 px-2 py-0.5 text-xs font-medium text-primary transition-colors hover:bg-primary/10 sm:inline-flex"
+        >
+          <kbd className="font-mono font-bold">?</kbd>
+          <span>{t("nav.shortcuts")}</span>
+        </button>
         <nav data-testid="app-nav" className="flex items-center gap-1">
           <NavLink to="/" testId="nav-dashboard" icon={<LayoutDashboard className="h-4 w-4" />} label={t("nav.dashboard")} />
           <NavLink to="/tasks" testId="nav-tasks" icon={<ListTodo className="h-4 w-4" />} label={t("nav.tasks")} />

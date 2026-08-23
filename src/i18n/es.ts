@@ -105,6 +105,9 @@ export const es = {
     title: "Atajos de teclado",
     description: "Presioná ? en cualquier momento para abrir esta página. Las secuencias son estilo vim: presioná la primera tecla y luego la segunda dentro de 1 segundo.",
     registered: "{{count}} atajos registrados",
+    hintBanner: "Presioná ? para ver todos los atajos de teclado",
+    hintDismiss: "Cerrar",
+    hintView: "Ver atajos",
     columns: {
       key: "Tecla",
       action: "Acción",

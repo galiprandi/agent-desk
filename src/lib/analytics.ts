@@ -88,9 +88,6 @@ export const analytics = {
 
   linkDeleted: () => trackEvent("link_delete"),
 
-  // Config events
-  configSet: (key: string) => trackEvent("config_set", { key }),
-
   // Search
   searchPerformed: (resultCount: number) =>
     trackEvent("search", { result_count: resultCount }),

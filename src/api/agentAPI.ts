@@ -350,7 +350,6 @@ export const configAPI = {
     cacheSetConfig(key, value);
     void db.config.put({ key, value });
     notifyApiChange();
-    analytics.configSet(key);
   },
 };
 

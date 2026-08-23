@@ -7,6 +7,7 @@ export const en = {
     dashboard: "Dashboard",
     tasks: "Tasks",
     calendar: "Calendar",
+    shortcuts: "Shortcuts",
   },
   theme: {
     toggle: "Toggle theme",
@@ -100,6 +101,75 @@ export const en = {
     ready: "Ready",
     notReady: "Initializing…",
   },
+  shortcuts: {
+    title: "Keyboard Shortcuts",
+    description: "Press ? at any time to open this page. Sequences are vim-style: press the first key, then the second within 1 second.",
+    registered: "{{count}} shortcuts registered",
+    columns: {
+      key: "Key",
+      action: "Action",
+      description: "Description",
+    },
+    groups: {
+      navigation: "Navigation",
+      actions: "Actions",
+      session: "Session",
+      ui: "Interface",
+      data: "Data",
+    },
+    goDashboard: {
+      name: "Go to Dashboard",
+      description: "Navigate to the dashboard view",
+    },
+    goTasks: {
+      name: "Go to Tasks",
+      description: "Navigate to the tasks view",
+    },
+    goCalendar: {
+      name: "Go to Calendar",
+      description: "Navigate to the calendar view",
+    },
+    goShortcuts: {
+      name: "Go to Shortcuts",
+      description: "Navigate to this shortcuts reference",
+    },
+    showShortcuts: {
+      name: "Show shortcuts",
+      description: "Open this shortcuts reference page",
+    },
+    newTask: {
+      name: "New task",
+      description: "Open the new task dialog on the tasks view",
+    },
+    newEvent: {
+      name: "New event",
+      description: "Open the new event dialog on the calendar view",
+    },
+    startSession: {
+      name: "Start session",
+      description: "Start a new work session",
+    },
+    endSession: {
+      name: "End session",
+      description: "End the current work session",
+    },
+    toggleTheme: {
+      name: "Toggle theme",
+      description: "Switch between light and dark theme",
+    },
+    backDashboard: {
+      name: "Back to dashboard",
+      description: "Return to the dashboard from any view",
+    },
+    exportBackup: {
+      name: "Export backup",
+      description: "Download a JSON backup of all data",
+    },
+    importBackup: {
+      name: "Import backup",
+      description: "Restore data from a JSON backup file",
+    },
+  },
   llmInstructions: {
     title: "LLM / Agent API instructions (hidden)",
     dashboard: [
@@ -130,6 +200,16 @@ export const en = {
       "List events: agentAPI.events.list() returns all events.",
       "Filter by date range: agentAPI.events.list({from: \"2026-08-01\", to: \"2026-08-31\"}).",
       "Link an event to a task: agentAPI.links.create({from: eventId, to: taskId, type: \"scheduled-for\"}).",
+    ],
+    shortcuts: [
+      "Shortcuts view — reference for all keyboard shortcuts.",
+      "Press ? at any time to open this page.",
+      "Navigation sequences (vim-style): g d (dashboard), g t (tasks), g c (calendar), g s (shortcuts).",
+      "Action sequences: n t (new task), n e (new event).",
+      "Single keys: s (start session), x (end session), t (toggle theme), Esc (back to dashboard).",
+      "Data shortcuts: Mod+E (export backup), Mod+I (import backup).",
+      "Agents can trigger navigation by dispatching CustomEvents: window.dispatchEvent(new CustomEvent(\"agent-desk:new-task\")).",
+      "CustomEvent names: agent-desk:new-task, agent-desk:new-event, agent-desk:toggle-theme, agent-desk:export-backup, agent-desk:import-backup.",
     ],
   },
 };

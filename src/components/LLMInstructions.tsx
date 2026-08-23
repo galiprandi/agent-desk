@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-export type LLMViewName = "dashboard" | "tasks" | "calendar";
+export type LLMViewName = "dashboard" | "tasks" | "calendar" | "shortcuts";
 
 interface LLMInstructionsProps {
   view: LLMViewName;

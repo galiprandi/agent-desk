@@ -7,6 +7,7 @@ export const es = {
     dashboard: "Panel",
     tasks: "Tareas",
     calendar: "Calendario",
+    shortcuts: "Atajos",
   },
   theme: {
     toggle: "Cambiar tema",
@@ -100,6 +101,75 @@ export const es = {
     ready: "Listo",
     notReady: "Inicializando…",
   },
+  shortcuts: {
+    title: "Atajos de teclado",
+    description: "Presioná ? en cualquier momento para abrir esta página. Las secuencias son estilo vim: presioná la primera tecla y luego la segunda dentro de 1 segundo.",
+    registered: "{{count}} atajos registrados",
+    columns: {
+      key: "Tecla",
+      action: "Acción",
+      description: "Descripción",
+    },
+    groups: {
+      navigation: "Navegación",
+      actions: "Acciones",
+      session: "Sesión",
+      ui: "Interfaz",
+      data: "Datos",
+    },
+    goDashboard: {
+      name: "Ir al panel",
+      description: "Navegar a la vista del panel",
+    },
+    goTasks: {
+      name: "Ir a tareas",
+      description: "Navegar a la vista de tareas",
+    },
+    goCalendar: {
+      name: "Ir al calendario",
+      description: "Navegar a la vista del calendario",
+    },
+    goShortcuts: {
+      name: "Ir a atajos",
+      description: "Navegar a la referencia de atajos",
+    },
+    showShortcuts: {
+      name: "Mostrar atajos",
+      description: "Abrir esta página de referencia de atajos",
+    },
+    newTask: {
+      name: "Nueva tarea",
+      description: "Abrir el diálogo de nueva tarea en la vista de tareas",
+    },
+    newEvent: {
+      name: "Nuevo evento",
+      description: "Abrir el diálogo de nuevo evento en la vista del calendario",
+    },
+    startSession: {
+      name: "Iniciar sesión",
+      description: "Iniciar una nueva sesión de trabajo",
+    },
+    endSession: {
+      name: "Finalizar sesión",
+      description: "Finalizar la sesión de trabajo actual",
+    },
+    toggleTheme: {
+      name: "Cambiar tema",
+      description: "Alternar entre tema claro y oscuro",
+    },
+    backDashboard: {
+      name: "Volver al panel",
+      description: "Volver al panel desde cualquier vista",
+    },
+    exportBackup: {
+      name: "Exportar respaldo",
+      description: "Descargar un respaldo JSON de todos los datos",
+    },
+    importBackup: {
+      name: "Importar respaldo",
+      description: "Restaurar datos desde un archivo de respaldo JSON",
+    },
+  },
   llmInstructions: {
     title: "Instrucciones para LLM / Agent API (oculto)",
     dashboard: [
@@ -130,6 +200,16 @@ export const es = {
       "Listar eventos: agentAPI.events.list() devuelve todos los eventos.",
       "Filtrar por rango de fechas: agentAPI.events.list({from: \"2026-08-01\", to: \"2026-08-31\"}).",
       "Enlazar un evento con una tarea: agentAPI.links.create({from: eventId, to: taskId, type: \"scheduled-for\"}).",
+    ],
+    shortcuts: [
+      "Vista de atajos — referencia de todos los atajos de teclado.",
+      "Presioná ? en cualquier momento para abrir esta página.",
+      "Secuencias de navegación (estilo vim): g d (panel), g t (tareas), g c (calendario), g s (atajos).",
+      "Secuencias de acciones: n t (nueva tarea), n e (nuevo evento).",
+      "Teclas únicas: s (iniciar sesión), x (finalizar sesión), t (cambiar tema), Esc (volver al panel).",
+      "Atajos de datos: Mod+E (exportar respaldo), Mod+I (importar respaldo).",
+      "Los agentes pueden disparar navegación con CustomEvents: window.dispatchEvent(new CustomEvent(\"agent-desk:new-task\")).",
+      "Nombres de CustomEvents: agent-desk:new-task, agent-desk:new-event, agent-desk:toggle-theme, agent-desk:export-backup, agent-desk:import-backup.",
     ],
   },
 };

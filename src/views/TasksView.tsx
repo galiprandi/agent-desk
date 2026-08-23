@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   useReactTable,
@@ -17,6 +17,7 @@ import { KanbanBoard } from "@/components/KanbanBoard";
 import { tasksAPI, linksAPI } from "@/api/agentAPI";
 import { useApiRefresh } from "@/hooks/useApiRefresh";
 import { useTaskStates } from "@/hooks/useTaskStates";
+import { SHORTCUT_EVENTS } from "@/lib/shortcuts";
 import type { TaskRecord } from "@/lib/db";
 import { LLMInstructions } from "@/components/LLMInstructions";
 
@@ -85,6 +86,13 @@ export function TasksView() {
     setEditing(task);
     setDialogOpen(true);
   };
+
+  // Listen for keyboard shortcut "new task" event (ADR-0017)
+  useEffect(() => {
+    const handler = () => openNew();
+    window.addEventListener(SHORTCUT_EVENTS.newTask, handler);
+    return () => window.removeEventListener(SHORTCUT_EVENTS.newTask, handler);
+  }, []);
 
   return (
     <div className="space-y-4" data-testid="tasks-view">

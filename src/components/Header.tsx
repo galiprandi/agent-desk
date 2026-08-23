@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Moon, Sun, Languages, LayoutDashboard, ListTodo, Calendar, Database, Download, Upload } from "lucide-react";
+import { Moon, Sun, Languages, LayoutDashboard, ListTodo, Calendar, Database, Download, Upload, Keyboard } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +12,7 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 import { useLanguage } from "@/hooks/useLanguage";
 import { agentAPI } from "@/api/agentAPI";
+import { SHORTCUT_EVENTS } from "@/lib/shortcuts";
 import { cn } from "@/lib/utils";
 
 function NavLink({ to, icon, label, testId }: { to: string; icon: React.ReactNode; label: string; testId: string }) {
@@ -71,6 +72,21 @@ export function Header() {
     }
   };
 
+  // Listen for keyboard shortcut events (ADR-0017)
+  useEffect(() => {
+    const onToggleTheme = () => toggleTheme();
+    const onExport = () => handleExport();
+    const onImport = () => handleImportClick();
+    window.addEventListener(SHORTCUT_EVENTS.toggleTheme, onToggleTheme);
+    window.addEventListener(SHORTCUT_EVENTS.exportBackup, onExport);
+    window.addEventListener(SHORTCUT_EVENTS.importBackup, onImport);
+    return () => {
+      window.removeEventListener(SHORTCUT_EVENTS.toggleTheme, onToggleTheme);
+      window.removeEventListener(SHORTCUT_EVENTS.exportBackup, onExport);
+      window.removeEventListener(SHORTCUT_EVENTS.importBackup, onImport);
+    };
+  }, [toggleTheme]);
+
   return (
     <header data-testid="app-header" className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
@@ -79,6 +95,7 @@ export function Header() {
           <NavLink to="/" testId="nav-dashboard" icon={<LayoutDashboard className="h-4 w-4" />} label={t("nav.dashboard")} />
           <NavLink to="/tasks" testId="nav-tasks" icon={<ListTodo className="h-4 w-4" />} label={t("nav.tasks")} />
           <NavLink to="/calendar" testId="nav-calendar" icon={<Calendar className="h-4 w-4" />} label={t("nav.calendar")} />
+          <NavLink to="/shortcuts" testId="nav-shortcuts" icon={<Keyboard className="h-4 w-4" />} label={t("nav.shortcuts")} />
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>

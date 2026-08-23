@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   addMonths,
@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { EventDialog } from "@/components/EventDialog";
 import { eventsAPI } from "@/api/agentAPI";
 import { useApiRefresh } from "@/hooks/useApiRefresh";
+import { SHORTCUT_EVENTS } from "@/lib/shortcuts";
 import type { EventRecord } from "@/lib/db";
 import { cn } from "@/lib/utils";
 import { LLMInstructions } from "@/components/LLMInstructions";
@@ -49,6 +50,13 @@ export function CalendarView() {
     setDefaultStart(undefined);
     setDialogOpen(true);
   };
+
+  // Listen for keyboard shortcut "new event" event (ADR-0017)
+  useEffect(() => {
+    const handler = () => openNew();
+    window.addEventListener(SHORTCUT_EVENTS.newEvent, handler);
+    return () => window.removeEventListener(SHORTCUT_EVENTS.newEvent, handler);
+  }, []);
 
   const prev = () =>
     setCursor((c) =>

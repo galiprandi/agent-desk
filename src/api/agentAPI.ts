@@ -37,6 +37,7 @@ import {
   type ExportSnapshot,
   type ImportResult,
 } from "@/lib/export";
+import { analytics } from "@/lib/analytics";
 
 export const DEFAULT_TASK_STATES = ["backlog", "todo", "in-progress", "done"];
 
@@ -127,6 +128,7 @@ export const tasksAPI = {
     // fire-and-forget persistence
     void db.tasks.put(task);
     notifyApiChange();
+    analytics.taskCreated(task.tags);
     return task;
   },
 
@@ -143,6 +145,10 @@ export const tasksAPI = {
     cacheUpdateTask(id, updated);
     void db.tasks.put(updated);
     notifyApiChange();
+    if (existing.status !== updated.status) {
+      analytics.taskStatusChanged(existing.status, updated.status);
+    }
+    analytics.taskUpdated(Object.keys(patch));
     return updated;
   },
 
@@ -151,6 +157,7 @@ export const tasksAPI = {
     cacheRemoveTask(id);
     void db.tasks.delete(id);
     notifyApiChange();
+    analytics.taskDeleted();
     return true;
   },
 
@@ -203,6 +210,7 @@ export const eventsAPI = {
     cacheAddEvent(event);
     void db.events.put(event);
     notifyApiChange();
+    analytics.eventCreated();
     return event;
   },
 
@@ -219,6 +227,7 @@ export const eventsAPI = {
     cacheUpdateEvent(id, updated);
     void db.events.put(updated);
     notifyApiChange();
+    analytics.eventUpdated();
     return updated;
   },
 
@@ -227,6 +236,7 @@ export const eventsAPI = {
     cacheRemoveEvent(id);
     void db.events.delete(id);
     notifyApiChange();
+    analytics.eventDeleted();
     return true;
   },
 
@@ -256,6 +266,7 @@ export const sessionAPI = {
     cacheAddSession(session);
     void db.sessions.put(session);
     notifyApiChange();
+    analytics.sessionStarted();
     return session;
   },
 
@@ -273,6 +284,10 @@ export const sessionAPI = {
     cacheUpdateSession(open.id, updated);
     void db.sessions.put(updated);
     notifyApiChange();
+    const durationMs = updated.endedAt
+      ? new Date(updated.endedAt).getTime() - new Date(open.startedAt).getTime()
+      : undefined;
+    analytics.sessionEnded(durationMs);
     return updated;
   },
 
@@ -303,6 +318,7 @@ export const linksAPI = {
     cacheAddLink(link);
     void db.links.put(link);
     notifyApiChange();
+    analytics.linkCreated(link.type);
     return link;
   },
 
@@ -311,6 +327,7 @@ export const linksAPI = {
     cacheRemoveLink(id);
     void db.links.delete(id);
     notifyApiChange();
+    analytics.linkDeleted();
     return true;
   },
 
@@ -333,6 +350,7 @@ export const configAPI = {
     cacheSetConfig(key, value);
     void db.config.put({ key, value });
     notifyApiChange();
+    analytics.configSet(key);
   },
 };
 
@@ -360,6 +378,7 @@ export const exportAPI = {
   import(input: unknown): Promise<ImportResult> {
     return importSnapshot(input).then((result) => {
       notifyApiChange();
+      analytics.exportImported(result.imported);
       return result;
     });
   },
@@ -369,7 +388,9 @@ export const exportAPI = {
    * the browser. Returns the filename used (or "" if no DOM).
    */
   download(snapshot: ExportSnapshot = buildSnapshot()): string {
-    return downloadSnapshot(snapshot);
+    const filename = downloadSnapshot(snapshot);
+    analytics.exportDownloaded();
+    return filename;
   },
 };
 
@@ -386,7 +407,7 @@ export function globalSearch(query: string): GlobalSearchResult {
   const taskIds = searchIds(taskIndex, query);
   const eventIds = searchIds(eventIndex, query);
   const sessionIds = searchIds(sessionIndex, query);
-  return {
+  const result = {
     tasks: taskIds
       .map((id) => cache.tasks.get(id))
       .filter((t): t is TaskRecord => Boolean(t)),
@@ -397,6 +418,10 @@ export function globalSearch(query: string): GlobalSearchResult {
       .map((id) => cache.sessions.get(id))
       .filter((s): s is SessionRecord => Boolean(s)),
   };
+  analytics.searchPerformed(
+    result.tasks.length + result.events.length + result.sessions.length,
+  );
+  return result;
 }
 
 // ----- Agent API object -----

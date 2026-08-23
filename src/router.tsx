@@ -5,9 +5,10 @@ import {
   createRouter,
   Outlet,
 } from "@tanstack/react-router";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { Header } from "./components/Header";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
+import { trackPageView } from "@/lib/analytics";
 
 const Dashboard = lazy(() =>
   import("./views/Dashboard").then((m) => ({ default: m.Dashboard }))
@@ -30,6 +31,11 @@ const rootRoute = createRootRoute({
   component: () => {
     // Register keyboard shortcuts globally (ADR-0017)
     useKeyboardShortcuts();
+    // Track page views on route change
+    useEffect(() => {
+      const path = window.location.hash.replace(/^#/, "") || "/";
+      trackPageView(path);
+    }, [window.location.hash]);
     return (
       <>
         <Header />

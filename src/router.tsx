@@ -5,10 +5,22 @@ import {
   createRouter,
   Outlet,
 } from "@tanstack/react-router";
-import { Dashboard } from "./views/Dashboard";
-import { TasksView } from "./views/TasksView";
-import { CalendarView } from "./views/CalendarView";
+import { Suspense, lazy } from "react";
 import { Header } from "./components/Header";
+
+const Dashboard = lazy(() =>
+  import("./views/Dashboard").then((m) => ({ default: m.Dashboard }))
+);
+const TasksView = lazy(() =>
+  import("./views/TasksView").then((m) => ({ default: m.TasksView }))
+);
+const CalendarView = lazy(() =>
+  import("./views/CalendarView").then((m) => ({ default: m.CalendarView }))
+);
+
+function ViewLoader({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={<div>Loading…</div>}>{children}</Suspense>;
+}
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -24,19 +36,31 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: Dashboard,
+  component: () => (
+    <ViewLoader>
+      <Dashboard />
+    </ViewLoader>
+  ),
 });
 
 const tasksRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "tasks",
-  component: TasksView,
+  component: () => (
+    <ViewLoader>
+      <TasksView />
+    </ViewLoader>
+  ),
 });
 
 const calendarRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "calendar",
-  component: CalendarView,
+  component: () => (
+    <ViewLoader>
+      <CalendarView />
+    </ViewLoader>
+  ),
 });
 
 const routeTree = rootRoute.addChildren([indexRoute, tasksRoute, calendarRoute]);

@@ -18,6 +18,14 @@ export const en = {
     en: "English",
     es: "Spanish",
   },
+  data: {
+    label: "Data",
+    export: "Export backup",
+    import: "Import backup",
+    importError: "Could not import backup: {{error}}",
+    importSuccess: "Imported {{tasks}} tasks, {{events}} events, {{sessions}} sessions",
+    imported: "Backup imported",
+  },
   dashboard: {
     requiresAttention: "Requires attention",
     upcomingEvents: "Upcoming events",

@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { router } from "./router";
 import { initAgentAPI, sessionAPI } from "@/api/agentAPI";
+import { useAutoExport, flushAutosave } from "@/hooks/useAutoExport";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,10 +26,14 @@ export default function App() {
     };
   }, []);
 
-  // Auto-save session end on page unload
+  // Silent periodic backup to localStorage (ADR-0016). No-op until ready.
+  useAutoExport();
+
+  // Auto-save session end + final snapshot on page unload
   useEffect(() => {
     const handler = () => {
       sessionAPI.end();
+      flushAutosave();
     };
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);

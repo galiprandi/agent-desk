@@ -11,9 +11,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/hooks/useTheme";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useApiRefresh } from "@/hooks/useApiRefresh";
 import { agentAPI } from "@/api/agentAPI";
 import { SHORTCUT_EVENTS } from "@/lib/shortcuts";
 import { cn } from "@/lib/utils";
+
+function getAgentName(): string {
+  const name = agentAPI.config.get("agentName");
+  return typeof name === "string" && name.trim() ? name : "agent-desk";
+}
 
 function NavLink({ to, icon, label, testId }: { to: string; icon: React.ReactNode; label: string; testId: string }) {
   const router = useRouterState();
@@ -43,6 +49,13 @@ export function Header() {
   const { current, change } = useLanguage();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  // Re-render when API changes (e.g. agentName config updated)
+  useApiRefresh();
+  const agentName = getAgentName();
+
+  useEffect(() => {
+    document.title = agentName;
+  }, [agentName]);
 
   const handleExport = () => {
     agentAPI.export.download();
@@ -91,7 +104,7 @@ export function Header() {
   return (
     <header data-testid="app-header" className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
-        <span data-testid="app-title" className="mr-2 text-lg font-bold">{t("app.title")}</span>
+        <span data-testid="app-title" className="mr-2 text-lg font-bold">{agentName}</span>
         <button
           onClick={() => navigate({ to: "/shortcuts" })}
           data-testid="header-shortcuts-hint"

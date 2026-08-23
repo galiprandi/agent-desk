@@ -30,7 +30,7 @@ describe("agentAPI exposure", () => {
     expect((window as any).agentAPIReady).toBe(true);
   });
 
-  it("has all 6 namespaces", () => {
+  it("has all 7 namespaces", () => {
     const api = (window as any).agentAPI;
     expect(api.tasks).toBeDefined();
     expect(api.events).toBeDefined();
@@ -38,6 +38,7 @@ describe("agentAPI exposure", () => {
     expect(api.links).toBeDefined();
     expect(api.config).toBeDefined();
     expect(api.search).toBeDefined();
+    expect(api.export).toBeDefined();
   });
 });
 

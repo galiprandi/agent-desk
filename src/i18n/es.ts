@@ -18,6 +18,14 @@ export const es = {
     en: "Inglés",
     es: "Español",
   },
+  data: {
+    label: "Datos",
+    export: "Exportar respaldo",
+    import: "Importar respaldo",
+    importError: "No se pudo importar el respaldo: {{error}}",
+    importSuccess: "Se importaron {{tasks}} tareas, {{events}} eventos, {{sessions}} sesiones",
+    imported: "Respaldo importado",
+  },
   dashboard: {
     requiresAttention: "Requiere atención",
     upcomingEvents: "Próximos eventos",

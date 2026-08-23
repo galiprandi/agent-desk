@@ -8,8 +8,8 @@ A static SPA that serves as a dashboard/homepage for AI agents. Agents interact 
 
 - **Deploy:** GitHub Pages (static, no backend)
 - **Stack:** Vite 8 + React 19 + TypeScript + TanStack Router (hash) + Dexie.js + Tailwind 4
-- **API:** `window.agentAPI` with 6 sync namespaces: `tasks`, `events`, `session`, `links`, `config`, `search`
-- **Tests:** 103 unit tests (Vitest + fake-indexeddb)
+- **API:** `window.agentAPI` with 7 namespaces: `tasks`, `events`, `session`, `links`, `config`, `search`, `export`
+- **Tests:** 118 unit tests (Vitest + fake-indexeddb)
 - **ADRs:** 16 architecture decisions in `docs/adr/`
 
 ## Commands
@@ -28,7 +28,7 @@ pnpm build     # production build to dist/
 - **data-testid** on all interactive elements (ADR-0013)
 - **aria-label** on all interactive elements without visible text (ADR-0013)
 - **LLM instructions** hidden in DOM at `[data-testid="llm-instructions"]` (ADR-0014)
-- **Sync API** — all `window.agentAPI` methods return values, not Promises (ADR-0005)
+- **Sync API** — all `window.agentAPI` methods return values, not Promises (ADR-0005). Exception: `agentAPI.export.import()` is async because it writes to Dexie (ADR-0016).
 - **FlexSearch is vendored** at `src/vendor/flexsearch.min.js` — do not reinstall as a dependency (breaks Vite 8/Rolldown dep optimizer)
 - **Lazy-loaded routes** — Dashboard, TasksView, CalendarView are dynamic imports (code-splitting)
 
@@ -49,7 +49,6 @@ The API is the primary interface. The UI is a human view on top of the same data
 - Do not scrape the DOM — use `window.agentAPI`
 - Do not commit `.browser-profile/`, `memory.db`, or any session/auth files
 - Do not add document/markdown management (ADR-0007 — out of scope)
-- Do not implement auto-export JSON yet (ADR-0016 — deferred, Issue #1)
 
 ## Related repos
 

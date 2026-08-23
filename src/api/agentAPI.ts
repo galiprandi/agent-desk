@@ -29,6 +29,14 @@ import {
   resetCache,
 } from "./cache";
 import { notifyApiChange } from "@/hooks/useApiRefresh";
+import {
+  buildSnapshot,
+  snapshotToJSON,
+  importSnapshot,
+  downloadSnapshot,
+  type ExportSnapshot,
+  type ImportResult,
+} from "@/lib/export";
 
 export const DEFAULT_TASK_STATES = ["backlog", "todo", "in-progress", "done"];
 
@@ -328,6 +336,43 @@ export const configAPI = {
   },
 };
 
+// ----- Export namespace -----
+//
+// Sync snapshot of all data (read from cache). `import` is async because it
+// writes to IndexedDB; this is the only async method on agentAPI and is
+// documented as such. See ADR-0016.
+
+export const exportAPI = {
+  /** Build a JSON-serializable snapshot of all data (sync, from cache). */
+  all(): ExportSnapshot {
+    return buildSnapshot();
+  },
+
+  /** Pretty-printed JSON string of the current snapshot. */
+  toJSON(): string {
+    return snapshotToJSON();
+  },
+
+  /**
+   * Restore from a snapshot. Validates schema + version, then replaces all
+   * data in cache and IndexedDB. Resolves with per-table counts.
+   */
+  import(input: unknown): Promise<ImportResult> {
+    return importSnapshot(input).then((result) => {
+      notifyApiChange();
+      return result;
+    });
+  },
+
+  /**
+   * Trigger a browser download of the snapshot as a JSON file. No-op outside
+   * the browser. Returns the filename used (or "" if no DOM).
+   */
+  download(snapshot: ExportSnapshot = buildSnapshot()): string {
+    return downloadSnapshot(snapshot);
+  },
+};
+
 // ----- Global search -----
 
 export interface GlobalSearchResult {
@@ -363,6 +408,7 @@ export interface AgentAPI {
   links: typeof linksAPI;
   config: typeof configAPI;
   search: typeof globalSearch;
+  export: typeof exportAPI;
 }
 
 export const agentAPI: AgentAPI = {
@@ -372,6 +418,7 @@ export const agentAPI: AgentAPI = {
   links: linksAPI,
   config: configAPI,
   search: globalSearch,
+  export: exportAPI,
 };
 
 // ----- Initialization -----

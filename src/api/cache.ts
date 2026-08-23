@@ -1,4 +1,4 @@
-import FlexSearch from "flexsearch";
+import FlexSearch from "@/vendor/flexsearch.min.js";
 import { db } from "@/lib/db";
 import type {
   TaskRecord,

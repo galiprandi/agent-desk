@@ -13,7 +13,6 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      flexsearch: path.resolve(__dirname, "./node_modules/flexsearch/dist/flexsearch.bundle.module.min.js"),
       dexie: path.resolve(__dirname, "./node_modules/dexie/dist/dexie.mjs"),
     },
   },

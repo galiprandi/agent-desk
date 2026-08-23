@@ -73,7 +73,7 @@ export function CalendarView() {
     <div className="space-y-4" data-testid="calendar-view">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold" data-testid="calendar-title">{t("calendar.title")}</h1>
-        <Button onClick={() => openNew()} data-testid="event-create-btn">
+        <Button onClick={() => openNew()} data-testid="event-create-btn" aria-label="Create event">
           <Plus className="h-4 w-4" />
           {t("calendar.new")}
         </Button>
@@ -82,9 +82,9 @@ export function CalendarView() {
       <Tabs value={mode} onValueChange={(v) => setMode(v as ViewMode)} data-testid="calendar-view-switcher">
         <div className="flex items-center justify-between">
           <TabsList>
-            <TabsTrigger value="month" data-testid="calendar-tab-month">{t("calendar.month")}</TabsTrigger>
-            <TabsTrigger value="week" data-testid="calendar-tab-week">{t("calendar.week")}</TabsTrigger>
-            <TabsTrigger value="day" data-testid="calendar-tab-day">{t("calendar.day")}</TabsTrigger>
+            <TabsTrigger value="month" data-testid="calendar-tab-month" aria-label="Month view">{t("calendar.month")}</TabsTrigger>
+            <TabsTrigger value="week" data-testid="calendar-tab-week" aria-label="Week view">{t("calendar.week")}</TabsTrigger>
+            <TabsTrigger value="day" data-testid="calendar-tab-day" aria-label="Day view">{t("calendar.day")}</TabsTrigger>
           </TabsList>
           <div className="flex items-center gap-2">
             <Button variant="outline" size="icon" onClick={prev} data-testid="calendar-prev" aria-label={t("calendar.prev")}>
@@ -98,6 +98,7 @@ export function CalendarView() {
               variant="ghost"
               size="sm"
               data-testid="calendar-today"
+              aria-label="Go to today"
               onClick={() => {
                 setCursor(new Date());
               }}
@@ -280,6 +281,7 @@ function DayView({
                 size="icon"
                 className="h-7 w-7 opacity-0 group-hover:opacity-100"
                 data-testid={`event-delete-${e.id}`}
+                aria-label="Delete event"
                 onClick={(ev) => {
                   ev.stopPropagation();
                   if (confirm(t("calendar.confirmDelete"))) eventsAPI.delete(e.id);

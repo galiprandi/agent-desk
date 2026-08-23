@@ -90,7 +90,7 @@ export function TasksView() {
     <div className="space-y-4" data-testid="tasks-view">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold" data-testid="tasks-title">{t("tasks.title")}</h1>
-        <Button onClick={openNew} data-testid="task-create-btn">
+        <Button onClick={openNew} data-testid="task-create-btn" aria-label="Create task">
           <Plus className="h-4 w-4" />
           {t("tasks.new")}
         </Button>
@@ -98,8 +98,8 @@ export function TasksView() {
 
       <Tabs defaultValue="kanban" data-testid="tasks-view-toggle">
         <TabsList>
-          <TabsTrigger value="kanban" data-testid="tasks-tab-kanban">{t("tasks.kanban")}</TabsTrigger>
-          <TabsTrigger value="list" data-testid="tasks-tab-list">{t("tasks.list")}</TabsTrigger>
+          <TabsTrigger value="kanban" data-testid="tasks-tab-kanban" aria-label="Kanban view">{t("tasks.kanban")}</TabsTrigger>
+          <TabsTrigger value="list" data-testid="tasks-tab-list" aria-label="List view">{t("tasks.list")}</TabsTrigger>
         </TabsList>
         <TabsContent value="kanban" data-testid="tasks-kanban-content">
           <KanbanBoard states={states} onEditTask={openEdit} />

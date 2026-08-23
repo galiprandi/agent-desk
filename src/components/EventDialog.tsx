@@ -155,10 +155,10 @@ export function EventDialog({ open, onOpenChange, event, defaultStart }: EventDi
           )}
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="event-cancel-btn">
+          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="event-cancel-btn" aria-label="Cancel">
             {t("calendar.cancel")}
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim()} data-testid="event-submit-btn">
+          <Button onClick={handleSave} disabled={!title.trim()} data-testid="event-submit-btn" aria-label="Save event">
             {t("calendar.save")}
           </Button>
         </DialogFooter>

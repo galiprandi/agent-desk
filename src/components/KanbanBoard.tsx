@@ -187,6 +187,7 @@ function TaskCard({
           size="icon"
           className="h-6 w-6 opacity-0 group-hover:opacity-100"
           data-testid={`task-delete-${task.id}`}
+          aria-label="Delete task"
           onClick={(e) => {
             e.stopPropagation();
             if (confirm(t("tasks.confirmDelete"))) tasksAPI.delete(task.id);

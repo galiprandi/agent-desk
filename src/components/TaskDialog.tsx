@@ -100,9 +100,9 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>{t("tasks.status")}</Label>
+              <Label htmlFor="task-status">{t("tasks.status")}</Label>
               <Select value={status} onValueChange={setStatus}>
-                <SelectTrigger data-testid="task-field-status">
+                <SelectTrigger id="task-status" data-testid="task-field-status">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -115,12 +115,12 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>{t("tasks.priority")}</Label>
+              <Label htmlFor="task-priority">{t("tasks.priority")}</Label>
               <Select
                 value={priority}
                 onValueChange={(v) => setPriority(v as TaskRecord["priority"])}
               >
-                <SelectTrigger data-testid="task-field-priority">
+                <SelectTrigger id="task-priority" data-testid="task-field-priority">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -157,10 +157,10 @@ export function TaskDialog({ open, onOpenChange, task }: TaskDialogProps) {
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="task-cancel-btn">
+          <Button variant="outline" onClick={() => onOpenChange(false)} data-testid="task-cancel-btn" aria-label="Cancel">
             {t("tasks.cancel")}
           </Button>
-          <Button onClick={handleSave} disabled={!title.trim()} data-testid="task-submit-btn">
+          <Button onClick={handleSave} disabled={!title.trim()} data-testid="task-submit-btn" aria-label="Save task">
             {t("tasks.save")}
           </Button>
         </DialogFooter>

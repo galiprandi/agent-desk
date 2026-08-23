@@ -21,6 +21,7 @@ function NavLink({ to, icon, label, testId }: { to: string; icon: React.ReactNod
       to={to}
       data-testid={testId}
       data-active={active}
+      aria-label={label}
       className={cn(
         "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
         active
@@ -56,10 +57,10 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" data-testid="language-menu">
-              <DropdownMenuItem data-testid="language-en" onClick={() => change("en")}>
+              <DropdownMenuItem data-testid="language-en" aria-label={t("language.en")} onClick={() => change("en")}>
                 {t("language.en")} {current === "en" && "✓"}
               </DropdownMenuItem>
-              <DropdownMenuItem data-testid="language-es" onClick={() => change("es")}>
+              <DropdownMenuItem data-testid="language-es" aria-label={t("language.es")} onClick={() => change("es")}>
                 {t("language.es")} {current === "es" && "✓"}
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -23,13 +23,13 @@ import { LLMInstructions } from "@/components/LLMInstructions";
 
 export function TasksView() {
   const { t } = useTranslation();
-  useApiRefresh();
+  const refresh = useApiRefresh();
   const states = useTaskStates();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<TaskRecord | null>(null);
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const tasks = useMemo(() => tasksAPI.list(), []);
+  const tasks = useMemo(() => tasksAPI.list(), [refresh]);
 
   const columnHelper = createColumnHelper<TaskRecord>();
   const columns = useMemo(

@@ -25,7 +25,7 @@ const PRIORITY_ORDER: Record<TaskRecord["priority"], number> = {
 
 export function Dashboard() {
   const { t } = useTranslation();
-  useApiRefresh();
+  const refresh = useApiRefresh();
   const states = useTaskStates();
 
   const attentionTasks = useMemo(() => {
@@ -39,7 +39,7 @@ export function Dashboard() {
       })
       .filter((task) => !isDoneState(task.status, states))
       .sort((a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority]);
-  }, [states]);
+  }, [refresh, states]);
 
   const upcomingEvents = useMemo(() => {
     const now = new Date();
@@ -47,14 +47,14 @@ export function Dashboard() {
     return eventsAPI
       .list({ from: now.toISOString(), to: in7.toISOString() })
       .slice(0, 5);
-  }, []);
+  }, [refresh]);
 
-  const lastSession = useMemo(() => sessionAPI.get(), []);
+  const lastSession = useMemo(() => sessionAPI.get(), [refresh]);
 
   const activeTasks = useMemo(() => {
     const all = tasksAPI.list();
     return all.filter((task) => !isDoneState(task.status, states));
-  }, [states]);
+  }, [refresh, states]);
 
   return (
     <div className="space-y-6" data-testid="dashboard-view">

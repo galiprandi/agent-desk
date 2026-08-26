@@ -31,7 +31,7 @@ interface KanbanBoardProps {
 }
 
 export function KanbanBoard({ states, onEditTask }: KanbanBoardProps) {
-  useApiRefresh();
+  const refresh = useApiRefresh();
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
   );
@@ -50,7 +50,7 @@ export function KanbanBoard({ states, onEditTask }: KanbanBoardProps) {
       }
     }
     return map;
-  }, [states]);
+  }, [refresh, states]);
 
   const activeTask = activeId ? tasksAPI.get(activeId) : null;
 

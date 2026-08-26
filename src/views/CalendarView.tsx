@@ -31,14 +31,14 @@ type ViewMode = "month" | "week" | "day";
 
 export function CalendarView() {
   const { t } = useTranslation();
-  useApiRefresh();
+  const refresh = useApiRefresh();
   const [mode, setMode] = useState<ViewMode>("month");
   const [cursor, setCursor] = useState(new Date());
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editing, setEditing] = useState<EventRecord | null>(null);
   const [defaultStart, setDefaultStart] = useState<string | undefined>();
 
-  const events = useMemo(() => eventsAPI.list(), []);
+  const events = useMemo(() => eventsAPI.list(), [refresh]);
 
   const openNew = (start?: Date) => {
     setEditing(null);

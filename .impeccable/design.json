@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-24T00:00:00.000Z",
+  "title": "Design System: agent-desk",
+  "extensions": {
+    "colorMeta": {
+      "ink-deep": {
+        "role": "primary",
+        "displayName": "Ink Deep",
+        "canonical": "oklch(20% 0.04 250)",
+        "tonalRamp": ["oklch(10% 0.04 250)", "oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.04 250)", "oklch(30% 0.04 250)", "oklch(40% 0.03 250)", "oklch(55% 0.02 250)", "oklch(75% 0.01 250)"]
+      },
+      "ink-primary": {
+        "role": "primary",
+        "displayName": "Ink Primary",
+        "canonical": "oklch(25% 0.04 250)",
+        "tonalRamp": ["oklch(10% 0.04 250)", "oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.04 250)", "oklch(30% 0.04 250)", "oklch(40% 0.03 250)", "oklch(55% 0.02 250)", "oklch(75% 0.01 250)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": ["oklch(100% 0 0)", "oklch(98% 0.003 240)", "oklch(96% 0.005 240)", "oklch(93% 0.008 240)", "oklch(88% 0.012 240)", "oklch(80% 0.018 240)", "oklch(65% 0.022 240)", "oklch(45% 0.03 240)"]
+      },
+      "paper-cool": {
+        "role": "neutral",
+        "displayName": "Paper Cool",
+        "canonical": "oklch(96% 0.005 240)",
+        "tonalRamp": ["oklch(100% 0 0)", "oklch(98% 0.003 240)", "oklch(96% 0.005 240)", "oklch(93% 0.008 240)", "oklch(88% 0.012 240)", "oklch(80% 0.018 240)", "oklch(65% 0.022 240)", "oklch(45% 0.03 240)"]
+      },
+      "paper-cool-deep": {
+        "role": "neutral",
+        "displayName": "Paper Cool Deep",
+        "canonical": "oklch(30% 0.03 250)",
+        "tonalRamp": ["oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.035 250)", "oklch(30% 0.03 250)", "oklch(40% 0.025 250)", "oklch(55% 0.02 250)", "oklch(70% 0.015 250)", "oklch(85% 0.008 250)"]
+      },
+      "slate-muted": {
+        "role": "neutral",
+        "displayName": "Slate Muted",
+        "canonical": "oklch(55% 0.02 250)",
+        "tonalRamp": ["oklch(20% 0.04 250)", "oklch(30% 0.035 250)", "oklch(40% 0.025 250)", "oklch(50% 0.022 250)", "oklch(55% 0.02 250)", "oklch(65% 0.018 250)", "oklch(75% 0.012 250)", "oklch(85% 0.008 250)"]
+      },
+      "slate-muted-dark": {
+        "role": "neutral",
+        "displayName": "Slate Muted Dark",
+        "canonical": "oklch(70% 0.015 250)",
+        "tonalRamp": ["oklch(25% 0.035 250)", "oklch(35% 0.028 250)", "oklch(45% 0.022 250)", "oklch(55% 0.018 250)", "oklch(65% 0.015 250)", "oklch(70% 0.015 250)", "oklch(80% 0.01 250)", "oklch(90% 0.005 250)"]
+      },
+      "border-faint": {
+        "role": "neutral",
+        "displayName": "Border Faint",
+        "canonical": "oklch(90% 0.008 240)",
+        "tonalRamp": ["oklch(100% 0 0)", "oklch(96% 0.005 240)", "oklch(93% 0.008 240)", "oklch(90% 0.008 240)", "oklch(85% 0.01 240)", "oklch(75% 0.015 240)", "oklch(60% 0.02 240)", "oklch(40% 0.03 240)"]
+      },
+      "border-dark": {
+        "role": "neutral",
+        "displayName": "Border Dark",
+        "canonical": "oklch(30% 0.03 250)",
+        "tonalRamp": ["oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.035 250)", "oklch(30% 0.03 250)", "oklch(40% 0.025 250)", "oklch(55% 0.02 250)", "oklch(70% 0.015 250)", "oklch(85% 0.008 250)"]
+      },
+      "ring-light": {
+        "role": "primary",
+        "displayName": "Ring Light",
+        "canonical": "oklch(20% 0.04 250)",
+        "tonalRamp": ["oklch(10% 0.04 250)", "oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.04 250)", "oklch(30% 0.04 250)", "oklch(40% 0.03 250)", "oklch(55% 0.02 250)", "oklch(75% 0.01 250)"]
+      },
+      "ring-dark": {
+        "role": "neutral",
+        "displayName": "Ring Dark",
+        "canonical": "oklch(80% 0.01 250)",
+        "tonalRamp": ["oklch(25% 0.035 250)", "oklch(35% 0.028 250)", "oklch(45% 0.022 250)", "oklch(55% 0.018 250)", "oklch(65% 0.015 250)", "oklch(75% 0.012 250)", "oklch(80% 0.01 250)", "oklch(90% 0.005 250)"]
+      },
+      "signal-red": {
+        "role": "primary",
+        "displayName": "Signal Red",
+        "canonical": "oklch(63% 0.22 25)",
+        "tonalRamp": ["oklch(25% 0.15 25)", "oklch(35% 0.18 25)", "oklch(45% 0.20 25)", "oklch(55% 0.21 25)", "oklch(63% 0.22 25)", "oklch(70% 0.20 25)", "oklch(80% 0.15 25)", "oklch(90% 0.08 25)"]
+      },
+      "signal-red-deep": {
+        "role": "primary",
+        "displayName": "Signal Red Deep",
+        "canonical": "oklch(35% 0.15 25)",
+        "tonalRamp": ["oklch(20% 0.10 25)", "oklch(25% 0.12 25)", "oklch(30% 0.14 25)", "oklch(35% 0.15 25)", "oklch(45% 0.18 25)", "oklch(55% 0.20 25)", "oklch(70% 0.18 25)", "oklch(85% 0.10 25)"]
+      },
+      "primary-foreground-light": {
+        "role": "neutral",
+        "displayName": "Primary Foreground Light",
+        "canonical": "oklch(98% 0.003 240)",
+        "tonalRamp": ["oklch(98% 0.003 240)", "oklch(95% 0.005 240)", "oklch(90% 0.008 240)", "oklch(85% 0.01 240)", "oklch(75% 0.015 240)", "oklch(60% 0.02 240)", "oklch(40% 0.03 240)", "oklch(20% 0.04 250)"]
+      },
+      "primary-foreground-dark": {
+        "role": "primary",
+        "displayName": "Primary Foreground Dark",
+        "canonical": "oklch(25% 0.04 250)",
+        "tonalRamp": ["oklch(10% 0.04 250)", "oklch(15% 0.04 250)", "oklch(20% 0.04 250)", "oklch(25% 0.04 250)", "oklch(30% 0.04 250)", "oklch(40% 0.03 250)", "oklch(55% 0.02 250)", "oklch(75% 0.01 250)"]
+      }
+    },
+    "typographyMeta": {
+      "body": { "displayName": "Body", "purpose": "Default text for all content: task titles, event names, descriptions, dialog content. 14px base." },
+      "title": { "displayName": "Title", "purpose": "Page titles. The largest text on screen, still restrained." },
+      "label": { "displayName": "Label", "purpose": "Badges, metadata, timestamps, column headers. Weight carries hierarchy, not uppercase." },
+      "nav-link": { "displayName": "Nav Link", "purpose": "Navigation items. Medium weight to distinguish from body." }
+    },
+    "shadows": [
+      { "name": "legacy-card", "value": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06)", "purpose": "Legacy shadcn default on cards and buttons. Scheduled for removal per The Shadow Exit Rule." },
+      { "name": "legacy-sm", "value": "0 1px 2px 0 rgb(0 0 0 / 0.05)", "purpose": "Legacy shadcn subtle shadow on inputs, secondary/outline buttons. Scheduled for removal." },
+      { "name": "drag-overlay", "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)", "purpose": "Transient shadow on kanban drag overlay. Acceptable: signals state, not rest decoration." }
+    ],
+    "motion": [
+      { "name": "color-transition", "value": "transition-colors 150ms", "purpose": "Default for background/color state changes on buttons, nav links, badges." },
+      { "name": "dnd-transform", "value": "transform 200ms cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Drag-and-drop positional transform via @dnd-kit." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1152px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Default action button. Ink fill, paper text, 36px height.",
+      "html": "<button class=\"ds-btn-primary\">Save task</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; background: #0f172a; color: #f8fafc; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background 150ms; } .ds-btn-primary:hover { background: rgba(15, 23, 42, 0.9); } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 1px #020817; } .ds-btn-primary:disabled { opacity: 0.5; pointer-events: none; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary actions in dialogs and forms. Paper Cool fill.",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; background: #f1f5f9; color: #0f172a; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background 150ms; } .ds-btn-secondary:hover { background: rgba(241, 245, 249, 0.8); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 1px #020817; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Tertiary actions. Paper bg with faint border.",
+      "html": "<button class=\"ds-btn-outline\">Options</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 8px 16px; background: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background 150ms; } .ds-btn-outline:hover { background: #f1f5f9; color: #0f172a; } .ds-btn-outline:focus-visible { outline: none; box-shadow: 0 0 0 1px #020817; }"
+    },
+    {
+      "name": "Ghost Icon Button",
+      "kind": "button",
+      "refersTo": "button-icon",
+      "description": "Icon-only button for header controls (theme, language, data). Transparent at rest, Paper Cool on hover.",
+      "html": "<button class=\"ds-btn-icon\" aria-label=\"Toggle theme\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z\"/></svg></button>",
+      "css": ".ds-btn-icon { display: inline-flex; align-items: center; justify-content: center; height: 36px; width: 36px; background: transparent; color: #0f172a; border: none; border-radius: 6px; cursor: pointer; transition: background 150ms; } .ds-btn-icon:hover { background: #f1f5f9; color: #0f172a; } .ds-btn-icon:focus-visible { outline: none; box-shadow: 0 0 0 1px #020817; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Surface container for dashboard sections. 12px radius, 24px padding, 1px border.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-header\"><div class=\"ds-card-title\">Requires Attention</div><div class=\"ds-card-desc\">Tasks past due or due today</div></div><div class=\"ds-card-content\"><p class=\"ds-card-empty\">No tasks require attention.</p></div></div>",
+      "css": ".ds-card { background: #ffffff; color: #020817; border: 1px solid #e2e8f0; border-radius: 12px; font-family: ui-sans-serif, system-ui, sans-serif; } .ds-card-header { padding: 24px; display: flex; flex-direction: column; gap: 6px; } .ds-card-title { font-size: 16px; font-weight: 600; line-height: 1; letter-spacing: -0.01em; } .ds-card-desc { font-size: 14px; color: #64748b; } .ds-card-content { padding: 0 24px 24px; } .ds-card-empty { font-size: 14px; color: #64748b; }"
+    },
+    {
+      "name": "Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Text field for forms. Transparent bg, faint border, 36px height.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Task title\" />",
+      "css": ".ds-input { display: flex; width: 100%; height: 36px; padding: 4px 12px; background: transparent; color: #020817; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; font-family: ui-sans-serif, system-ui, sans-serif; transition: border-color 150ms; } .ds-input::placeholder { color: #64748b; } .ds-input:focus-visible { outline: none; border-color: #020817; box-shadow: 0 0 0 1px #020817; } .ds-input:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Badge Default",
+      "kind": "chip",
+      "refersTo": "badge-default",
+      "description": "Count or primary tag. Ink fill, paper text.",
+      "html": "<span class=\"ds-badge-default\">3</span>",
+      "css": ".ds-badge-default { display: inline-flex; align-items: center; padding: 2px 10px; background: #0f172a; color: #f8fafc; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Badge Secondary",
+      "kind": "chip",
+      "refersTo": "badge-secondary",
+      "description": "Due dates and secondary metadata. Paper Cool fill.",
+      "html": "<span class=\"ds-badge-secondary\">Aug 24, 2026</span>",
+      "css": ".ds-badge-secondary { display: inline-flex; align-items: center; padding: 2px 10px; background: #f1f5f9; color: #0f172a; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Badge Outline",
+      "kind": "chip",
+      "refersTo": "badge-outline",
+      "description": "Priority, status, tags. Transparent with faint border.",
+      "html": "<span class=\"ds-badge-outline\">#urgent</span>",
+      "css": ".ds-badge-outline { display: inline-flex; align-items: center; padding: 2px 10px; background: transparent; color: #020817; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; font-weight: 600; font-family: ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Header navigation item. Muted text at rest, Paper Cool when active or hovered.",
+      "html": "<a class=\"ds-nav-link\" data-active=\"false\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"7\" height=\"9\" x=\"3\" y=\"3\" rx=\"1\"/><rect width=\"7\" height=\"5\" x=\"14\" y=\"3\" rx=\"1\"/><rect width=\"7\" height=\"9\" x=\"14\" y=\"12\" rx=\"1\"/><rect width=\"7\" height=\"5\" x=\"3\" y=\"16\" rx=\"1\"/></svg><span>Dashboard</span></a>",
+      "css": ".ds-nav-link { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: transparent; color: #64748b; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif; text-decoration: none; cursor: pointer; transition: background 150ms, color 150ms; } .ds-nav-link:hover { background: #f1f5f9; color: #0f172a; } .ds-nav-link[data-active=\"true\"] { background: #f1f5f9; color: #0f172a; } .ds-nav-link:focus-visible { outline: none; box-shadow: 0 0 0 1px #020817; }"
+    },
+    {
+      "name": "Kanban Card",
+      "kind": "custom",
+      "refersTo": "kanban-card",
+      "description": "Draggable task card inside kanban columns. Paper bg, 6px radius, badge row with priority/tags.",
+      "html": "<div class=\"ds-kanban-card\"><div class=\"ds-kanban-card-top\"><p class=\"ds-kanban-card-title\">Write API docs</p></div><p class=\"ds-kanban-card-desc\">Document the tasks namespace with examples</p><div class=\"ds-kanban-card-badges\"><span class=\"ds-badge-outline\">high</span><span class=\"ds-badge-secondary\">Aug 26</span></div></div>",
+      "css": ".ds-kanban-card { background: #ffffff; color: #020817; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; font-family: ui-sans-serif, system-ui, sans-serif; cursor: pointer; } .ds-kanban-card-top { display: flex; justify-content: space-between; gap: 8px; } .ds-kanban-card-title { font-size: 14px; font-weight: 500; margin: 0; } .ds-kanban-card-desc { font-size: 12px; color: #64748b; margin: 4px 0 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ds-kanban-card-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; } .ds-badge-outline { display: inline-flex; align-items: center; padding: 2px 10px; background: transparent; color: #020817; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; font-weight: 600; } .ds-badge-secondary { display: inline-flex; align-items: center; padding: 2px 10px; background: #f1f5f9; color: #0f172a; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Instrument Panel",
+    "overview": "agent-desk is an instrument panel, not a canvas. The interface exists so an agent (and its human curator) can read working state at a glance and act on it without friction. Every visual decision answers one question: does this help the operator scan, decide, and act faster?\n\nThe system is deliberately quiet. A single neutral palette (slate) carries the entire interface — backgrounds, text, borders, and surfaces all live on one cool-gray axis. There is no decorative color, no gradient, no ornamentation. The only chromatic signal is destructive red, reserved for irreversible actions. A single subtle accent for active/focus states is the intended direction; the incumbent does not yet express it, and that absence is documented here as an open decision rather than filled with a guess.\n\nDensity is moderate. Cards, inputs, and buttons share a 36px height standard. Spacing follows a 4px grid. The layout caps at max-w-6xl (1152px) centered, because an instrument panel does not sprawl — it frames. Dark mode inverts the slate axis; it does not introduce a new palette.",
+    "keyCharacteristics": [
+      "Neutral slate palette, single axis, light and dark",
+      "36px control height standard across buttons, inputs, nav links",
+      "4px spacing grid (4, 8, 12, 16, 24, 32)",
+      "Rounded corners from 4px (sm) to 12px (xl), never sharp, never pill",
+      "Flat surfaces; depth conveyed by tonal shift, not shadow (directional)",
+      "Sticky header with backdrop blur; content scrolls beneath",
+      "Bilingual (ES/EN), system font stack, no custom fonts",
+      "data-testid on every interactive element — the DOM is a control surface, not a display"
+    ],
+    "rules": [
+      { "name": "The Single Signal Rule", "body": "Destructive red is the only chromatic color in the system. It appears exclusively on irreversible actions. If a new status, priority, or category needs color, it gets a badge variant with a neutral fill — never a new hue.", "section": "colors" },
+      { "name": "The One Accent Direction", "body": "The system intends a single subtle chromatic accent for active/focus states. This accent is not yet codified as a token. When it lands, it must be one hue, used on <=10% of any screen, and reserved for state signaling — never decoration.", "section": "colors" },
+      { "name": "The No-Import Rule", "body": "Never load a custom font. The system stack is the system. A custom font would add a network dependency (violating zero-backend) and a visual personality the instrument panel does not want.", "section": "typography" },
+      { "name": "The Weight-Not-Size Rule", "body": "When two text elements need to feel different but share the same size, differentiate by weight (400 vs 500 vs 600 vs 700), not by adding another size step. The scale has four roles; resist a fifth.", "section": "typography" },
+      { "name": "The Frame Rule", "body": "Content never spans wider than 1152px. An instrument panel frames its data; it does not let it sprawl. If a view needs more width, it scrolls horizontally (kanban) rather than breaking the frame.", "section": "layout" },
+      { "name": "The Tone-Not-Shadow Rule", "body": "Surfaces express depth by background lightness, not by box-shadow. A raised surface is one step lighter (or darker, in dark mode) than its container. Shadows may appear only as a transient state signal (drag overlay, focus) — never as rest-state decoration.", "section": "elevation" },
+      { "name": "The Shadow Exit Rule", "body": "The remaining shadow and shadow-sm classes on buttons, cards, and inputs are scheduled for removal. New components must not add them.", "section": "elevation" },
+      { "name": "The No-Pill Rule", "body": "Pill shapes (rounded-full) are reserved for the shortcuts hint and nothing else. Buttons, badges, inputs, and cards use the radius scale. A pill on a button would read as decorative, and the instrument panel does not decorate.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do use the slate axis exclusively for all neutral surfaces. Background, text, border, and surface tones all come from the same hue family.",
+      "Do express depth by tonal shift (lighter surface on darker container, or vice versa in dark mode).",
+      "Do put data-testid on every interactive element and aria-label on every icon-only control. The DOM is a control surface for agents.",
+      "Do use 14px as the base text size. The instrument panel prioritizes density.",
+      "Do cap content width at 1152px (max-w-6xl). The frame is part of the design.",
+      "Do reserve Signal Red exclusively for destructive actions.",
+      "Do hide nav labels below 640px and keep icons. Mobile density matters."
+    ],
+    "donts": [
+      "Don't add shadow or shadow-sm to new components. The incumbent shadows are legacy; depth comes from tone.",
+      "Don't load custom fonts. The system stack is the system (zero-backend, no network requests).",
+      "Don't introduce a second chromatic color. One signal (red) plus the intended single accent is the maximum.",
+      "Don't use rounded-full on buttons, badges, inputs, or cards. The pill is reserved for the shortcuts hint.",
+      "Don't add decorative gradients, glassmorphism, or ornamental backgrounds. The instrument panel does not decorate.",
+      "Don't scrape the DOM for data. The UI is a view on window.agentAPI; visual patterns are for humans, not data extraction.",
+      "Don't break the 4px spacing grid. Every gap, padding, and margin is a multiple of 4."
+    ]
+  }
+}

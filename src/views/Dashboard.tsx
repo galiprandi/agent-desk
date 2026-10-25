@@ -122,7 +122,15 @@ export function Dashboard() {
 
         <Card data-testid="last-session">
           <CardHeader>
-            <CardTitle>{t("dashboard.lastSession")}</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              {t("dashboard.lastSession")}
+              {lastSession && !lastSession.endedAt && (
+                <span className="relative flex h-2 w-2" data-testid="session-active-dot">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                </span>
+              )}
+            </CardTitle>
           </CardHeader>
           <CardContent>
             {lastSession ? (

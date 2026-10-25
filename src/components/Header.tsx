@@ -33,7 +33,7 @@ function NavLink({ to, icon, label, testId }: { to: string; icon: React.ReactNod
       className={cn(
         "flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors",
         active
-          ? "bg-secondary text-secondary-foreground"
+          ? "bg-primary/10 text-primary"
           : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
       )}
     >
@@ -104,7 +104,9 @@ export function Header() {
   return (
     <header data-testid="app-header" className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
-        <span data-testid="app-title" className="mr-2 text-lg font-bold">{agentName}</span>
+        <span data-testid="app-title" className="mr-2 font-mono text-lg font-bold tracking-tight">
+          {agentName}<span className="text-primary">.</span>
+        </span>
         <button
           onClick={() => navigate({ to: "/shortcuts" })}
           data-testid="header-shortcuts-hint"

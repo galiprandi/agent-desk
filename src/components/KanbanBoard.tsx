@@ -118,12 +118,12 @@ function KanbanColumn({
 }) {
   const { setNodeRef } = useDroppable({ id: state });
   return (
-    <div className="flex w-72 shrink-0 flex-col rounded-lg border bg-muted/30" data-testid={`kanban-column-${state}`}>
-      <div className="flex items-center justify-between border-b p-3">
-        <span className="text-sm font-semibold capitalize">{state}</span>
-        <Badge variant="secondary" data-testid={`kanban-column-count-${state}`}>{tasks.length}</Badge>
+    <div className="flex min-w-56 flex-1 flex-col rounded-lg border bg-muted/30" data-testid={`kanban-column-${state}`}>
+      <div className="flex items-center justify-between border-b px-3 py-2.5">
+        <span className="font-mono text-xs font-bold uppercase tracking-widest text-muted-foreground">{state}</span>
+        <span data-testid={`kanban-column-count-${state}`} className="font-mono text-lg font-bold tabular-nums text-foreground/80">{tasks.length}</span>
       </div>
-      <div ref={setNodeRef} className="flex-1 space-y-2 p-2 min-h-[100px]">
+      <div ref={setNodeRef} className="flex-1 space-y-2 overflow-y-auto p-2 min-h-40 max-h-[calc(100vh-220px)]">
         <SortableContext
           items={tasks.map((t) => t.id)}
           strategy={verticalListSortingStrategy}
@@ -131,6 +131,9 @@ function KanbanColumn({
           {tasks.map((task) => (
             <SortableTaskCard key={task.id} task={task} onEditTask={onEditTask} />
           ))}
+          {tasks.length === 0 && (
+            <p className="px-1 py-6 text-center font-mono text-xs text-muted-foreground/60">empty</p>
+          )}
         </SortableContext>
       </div>
     </div>
@@ -175,8 +178,8 @@ function TaskCard({
   return (
     <div
       className={cn(
-        "group rounded-md border bg-card p-3 text-card-foreground shadow-sm",
-        dragging && "shadow-lg"
+        "group rounded-lg border bg-card p-2.5 text-card-foreground shadow-sm transition-shadow hover:shadow-md hover:border-primary/30",
+        dragging && "shadow-lg rotate-1"
       )}
       onClick={() => onEditTask?.(task)}
     >
@@ -199,19 +202,27 @@ function TaskCard({
       {task.description && (
         <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{task.description}</p>
       )}
-      <div className="mt-2 flex flex-wrap items-center gap-1">
-        <Badge variant="outline" className="text-xs">
-          {t(`priority.${task.priority}`)}
-        </Badge>
+      <div className="mt-2 flex flex-wrap items-center gap-1.5">
+        <span
+          className={cn(
+            "inline-block h-2 w-2 rounded-full",
+            task.priority === "high" && "bg-red-500",
+            task.priority === "medium" && "bg-amber-500",
+            task.priority === "low" && "bg-emerald-500",
+            !["high","medium","low"].includes(task.priority) && "bg-muted-foreground/40"
+          )}
+          title={t(`priority.${task.priority}`)}
+          aria-label={t(`priority.${task.priority}`)}
+        />
         {task.dueDate && (
           <Badge variant="secondary" className="text-xs">
             {new Date(task.dueDate).toLocaleDateString()}
           </Badge>
         )}
         {task.tags.map((tag) => (
-          <Badge key={tag} variant="outline" className="text-xs">
+          <span key={tag} className="font-mono text-[11px] text-muted-foreground">
             #{tag}
-          </Badge>
+          </span>
         ))}
         {backlinks.length > 0 && (
           <Badge variant="outline" className="text-xs">
